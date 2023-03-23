@@ -1,0 +1,142 @@
+package com.cg.pizza.controller;
+
+import java.net.URI;
+import java.util.List;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.cg.pizza.entity.Customer;
+import com.cg.pizza.exception.CoupanIdNotFoundException;
+import com.cg.pizza.exception.CustomerIdNotFoundException;
+import com.cg.pizza.service.CustomerService;
+
+
+
+
+
+
+@RestController
+@RequestMapping("/customer")
+public class CustomerController {
+	
+	@Autowired
+	private CustomerService customerService;
+	Logger logger = LoggerFactory.getLogger(CustomerController.class);
+	
+	//1 Get all customer
+	@GetMapping
+	public ResponseEntity<List<Customer>> getCustomer() {
+
+		List<Customer> customerList = customerService.getCustomer();
+		// Creating an error response.
+		ResponseEntity<List<Customer>> response = new ResponseEntity<>(customerList, HttpStatus.NOT_FOUND);
+		
+	  	// If customerList is not empty it sets the list in response else by default
+      	// error will be
+      	// there in response.
+		
+		if (!customerList.isEmpty()) {
+			response = new ResponseEntity<>(customerList, HttpStatus.OK);
+		}
+
+		return response;
+	}
+
+
+	 //2 Get customer by id
+	@GetMapping(value = "/{customerId}")
+	public ResponseEntity<Object> getCustomer(@PathVariable("customerId") int customerId) {
+		logger.debug("In getCustomer Method");
+
+		Customer customer = customerService.getCustomer(customerId);
+
+		
+		 if(customerId<0 ) {
+    		 logger.error("Customer id cant be negative");
+    		throw new CustomerIdNotFoundException( "Customer Id is not negative");
+    	 } 
+		//logger.info("Inside View  all Customer method");
+		// If customer is not null it sets the customer object in response else by default
+	  		// error
+	  		// will be there in response.
+		 else if (customer == null) {
+	  			//response = new ResponseEntity<>(customer, HttpStatus.OK);
+	  			logger.error(" Customer Id Not Found Exception");
+	  			throw new CoupanIdNotFoundException("Customer ID"  + customerId +  "Not Found");
+	  		}
+
+	  		//return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Customer" + customerId + "Not Found");
+	  		return new ResponseEntity<>(customer, HttpStatus.OK);
+	  	}
+
+	
+	//4 Delete the customer by id  
+	@DeleteMapping(value = "/{customerId}")
+	public ResponseEntity<Object> deleteCustomer(@PathVariable("customerId") int customerId) {
+		// If customer is deleted it returns deleted customer object else null
+		Customer customerPresent = customerService.deleteCustomer(customerId);
+		if(customerId<0) {
+   		 logger.error("Customer id cant be negative");
+   		throw new CustomerIdNotFoundException("CustomerId is not negative");
+   	 }
+		// Creating an success response.
+		
+		// response is set to error if customer is null.
+		else
+			if (customerPresent == null) {
+			
+			throw new CustomerIdNotFoundException(customerId + " Not Found");
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK).body("Customer " + customerId + " deleted");
+	}
+
+	//5 Update the customer by id
+	@PutMapping("/{customerId}")
+	public ResponseEntity<Object> updateProduct(@PathVariable("customerId") int customerId,
+			@RequestBody Customer customer) {
+		customer.setCustomerId(customerId);
+		// If customer is updated it returns updates customer object else null
+		Customer updateCustomer = customerService.updateCustomer(customer);
+		// response is set to error if customer is null.
+		if (updateCustomer == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Customer " + customerId + " Not found");
+		} else {
+ 			// response is set to updated message id in response header section.
+			URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+					.buildAndExpand(customer.getCustomerId()).toUri();
+			return ResponseEntity.created(location).build();
+		}
+	}
+
+	@PostMapping
+	public ResponseEntity<Object> addCustomer(@RequestBody Customer customer) {
+		logger.debug("Customer No is coming here"+customer.getCustomerId());
+		Customer newCustomer = customerService.insertCustomer(customer);
+		
+		if (newCustomer == null)
+			
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Inernal server error");
+		
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(newCustomer.getCustomerId()).toUri();
+		return ResponseEntity.created(location).build();
+	}
+
+	
+	
+}
