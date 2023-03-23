@@ -1,0 +1,73 @@
+<body>
+
+    <div class="jumbotron text center">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin ">
+                    <div class="card-body">
+                        <h5 class="card-title text-center" style="text-align: center;">Login as Admin</h5>
+                        <form class="form-signin" #signInForm="ngForm" (ngSubmit)="signInUser(signInForm.value)">
+
+
+
+
+
+
+
+
+
+                            <div class="form-label-group">
+                                <label style="text-align: center;" for="inputEmail">Admin Username : </label>
+                                <input id="inputEmail" type="text" onkeypress="return !(event.charCode == 46)" required
+                                    [pattern]="'^[a-zA-Z]*$'" minlength="5" class="form-control"
+                                    placeholder="Admin Name" name="adminName" [(ngModel)]=adminName #usr="ngModel">
+
+                                <div *ngIf="usr.invalid && (usr.dirty || usr.touched)" class="alert">
+                                    <em *ngIf="usr.errors?.required">Admin Username Is Required </em>
+                                    <em *ngIf="usr.errors?.pattern"> Please enter character only</em>
+                                    <em *ngIf="usr.errors?.minlength">Minimum Length Is 5 Characters</em>
+
+                                </div>
+                            </div>
+
+                            <div class="form-label-group">
+                                <label style="text-align: center;" for="inputPassword">Password : </label>
+                                <input id="inputPassword" type="text" onkeypress="return !(event.charCode == 46)"
+                                    required [pattern]="'^[a-zA-Z]*$'" minlength="5" class="form-control"
+                                    placeholder=" Enter Password" name="password" [(ngModel)]=password #pass="ngModel">
+                                <div *ngIf="pass.invalid && (pass.dirty || pass.touched)" class="alert">
+                                    <em *ngIf="pass.errors?.required"> Password Is Required </em>
+                                    <em *ngIf="pass.errors?.pattern"> Please enter character only</em>
+                                    <em *ngIf="pass.errors?.minlength">Minimum Length Is 5 Characters</em>
+
+
+
+                                </div>
+                            </div>
+
+
+
+                            &nbsp;<br>
+
+                            <button class="btn btn-lg  btn-primary" type="submit" [disabled]="!signInForm.valid">Sign
+                                In</button>
+
+                            <hr class="my-4">
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <router-outlet></router-outlet>
+    </div>
+
+</body>
+
+
+
+
+
+

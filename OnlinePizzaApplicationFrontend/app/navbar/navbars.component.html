@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Brand -->
+    <!-- <a class="navbar-brand" href="#">Logo</a> -->
+  
+    <!-- Links -->
+    <ul class="navbar-nav">
+      
+      <li class="nav-item">
+        <a class="nav-link"[routerLink] ="['/adminpage/customers']">Manage Customer</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"[routerLink] = "['/adminpage/pizza']">Manage Pizza</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"[routerLink] ="['/adminpage/coupans']">Manage Coupan</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"[routerLink] ="['/adminpage/pizzaorder']">Manage PizzaOrder</a>
+      </li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <li class="nav-item">
+        <a class="nav-link" (click)="signOut()">Sign Out</a>
+      </li>
+     
+    </ul>
+  </nav>
+  <router-outlet></router-outlet>

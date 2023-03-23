@@ -1,0 +1,12 @@
+<div>
+    <h1 class="test">Customer List</h1><br/>
+  </div>
+  <div class="row">
+    <div *ngFor="let Customer of Customers" class= "col-md-4" >
+      <all-customer #allcourse [customerdata] = Customer (customEvent)="parentFunction($event)"></all-customer > 
+     <div>
+     
+     </div>
+    </div>  
+     
+  </div>

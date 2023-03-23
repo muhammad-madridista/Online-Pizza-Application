@@ -1,0 +1,157 @@
+
+
+  <div class="col-md-6">
+    <div class="container">
+     <br>
+                <div style="card-align: center;">
+              <div class="card" style="width: 40rem;">
+              <div class="card-body">
+    
+    <form #newCustomerForm="ngForm" autocomplete="off" novalidate (ngSubmit)="addCustomer(newCustomerForm.value)">
+    <!-- //The ng-submit directive specifies a function to run when the form is submitted. 
+    I f the form does not have an action ng-submit will prevent the form from being submitted. -->
+  
+  
+  
+    <div class="form-row">
+      <div class="form-group col-md-6">
+          <label for="id">Customer Id</label>
+          <input  id="id" type="number" required [pattern] = "'^[1-9][0-9]*$'"class="form-control" name="customerId"  (ngModel)= customer.customerId placeholder="Enter Customer Id"#idd="ngModel">
+          <div *ngIf="idd.invalid && (idd.dirty || idd.touched)"class="alert">
+      <em *ngIf="idd.errors?.required">id is required.</em><em *ngIf="idd.errors?.pattern">Id Cant be negative</em>
+    </div>
+      </div>
+  
+  
+      <div class="form-group">
+          <label for="name">Customer Name</label>
+          <em *ngIf="newCustomerForm.controls.customerName?.invalid && (newCustomerForm.controls.customerName?.touched)">Required</em>
+          <input  id="name" type="text" required class="form-control" name="customerName"  required minlength="4" appForbiddenName="bob" (ngModel)=customer.customerName placeholder="Enter Customer Name">
+          
+      </div> 
+      <!-- <div class="form-group">
+        <label for="name">Customer Name</label>
+      <input type="text" id="name" name="name" class="form-control"
+      required minlength="4" appForbiddenName="bob"
+      [(ngModel)]="customer.customerName" #name="ngModel">
+
+<div *ngIf="newCustomerForm.controls.customerName?.invalid && (name.dirty || name.touched)"
+    class="alert">
+
+  <div *ngIf="newCustomerForm.controls.customerName?.errors?.required">
+    Name is required.
+  </div>
+  <div *ngIf="newCustomerForm.controls.customerName?.errors?.minlength">
+    Name must be at least 4 characters long.
+  </div>
+  <div *ngIf="newCustomerForm.controls.customerName?.errors?.forbiddenName">
+    Name cannot be Bob.
+  </div>
+</div>  
+</div> -->
+
+
+
+
+
+      <!-- <div class="form-group">
+        <label for="name"><h6>Customer Name</h6></label>
+        <input type="text" class="form-control" name="customerName" [(ngModel)]=customer.customerName placeholder="Enter customer name" id="name" required>
+        <em id="errName" style="color:  darkred; font-size: large;"></em>
+        <em *ngIf="newCustomerForm.controls.customerName?.invalid && (newCustomerForm.controls.customerName?.touched)" style="font-size: medium; color:  darkred"> customer name can't be empty</em>
+    </div> -->
+
+
+
+     
+      <div class="form-group">
+          <label for="Mobile">Customer Mobile</label>
+          <em id="errMobile" style="color:  rgb(255, 14, 14); font-size: large;"></em>
+          <em *ngIf="newCustomerForm.controls.customerMobile?.invalid && (newCustomerForm.controls.customerMobile?.touched)"style="font-size: medium; color: rgb(255, 14, 14);"> Phone number must contain 10 digit</em>
+          <input  id="Mobile" type="tel" required class="form-control" name="customerMobile"  pattern="[0-9]{10}" (ngModel)= customer.customerMobile placeholder="Enter Customer Mobile" required min="0" minlength="10" maxlength="10">
+          
+  
+      </div>            
+      
+      <!-- <div class="form-label-group">
+        <label for="Mobile"><h6>Customer Mobile</h6></label>
+        <input type="tel" class="form-control" name="customerMobile" pattern="[0-9]{10}" [(ngModel)]=user.customerMobile placeholder="Enter Phone Number" id="Mobile" required min="0" minlength="10" maxlength="10">
+        <em id="errMobile" style="color:  darkred; font-size: large;"></em>
+        <em *ngIf="newCustomerForm.controls.customerMobile?.invalid && (newCustomerForm.controls.customerMobile?.touched)" 
+        style="font-size: medium; color:  darkred"> Mobile number must contain 10 digit</em>
+    </div>
+
+
+
+       -->
+      
+      <!-- <div class="form-label-group">
+        <label for="Email"><h6>Customer Email</h6></label>
+        <input type="customerEmail" class="form-control" (change)="onChange($event)" name="customerEmail"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  [(ngModel)]=customer.customerEmail placeholder="Enter Email Address" id="email" required >
+        <div *ngIf="invalidData" > 
+            <p style="color:red;">E-mail already exists!!</p>
+        </div> 
+    </div>
+   -->
+  
+  
+  
+      <div class="form-group">
+          <label for="Email">Customer Email</label>
+          <em *ngIf="newCustomerForm.controls.customerEmail?.invalid && (newCustomerForm.controls.customerEmail?.touched)">Required</em>
+          <input  id="Email" type="text" required class="form-control" name="customerEmail"  pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" (ngModel)=customer.customerEmail placeholder="Enter customerEmail">
+          
+          <div *ngIf="newCustomerForm.submitted && email.invalid" class="invalid-feedback"></div>
+      
+  
+    </div>
+
+      <!-- <div class="form-group">
+        <label for="Email">Email</label>
+        <input type="text" class="form-control" name="email" [(ngModel)]="customer.customerEmail" #customerEmail="ngModel" [ngClass]="{ 'is-invalid': customer.submitted && customerEmail.invalid }" required email />
+        <div *ngIf="customer.submitted && email.invalid" class="invalid-feedback">
+            <div *ngIf="customerEmail.errors.required">Email is required</div>
+            <div *ngIf="customerEmail.errors.email">Email must be a valid email address</div>
+        </div>
+    </div> -->
+
+
+
+
+
+
+
+
+
+
+
+      <div class="form-group">
+          <label for="Address"> customer Address</label>
+          <em *ngIf="newCustomerForm.controls.customerAddress?.invalid && (newCustomerForm.controls.customerAddress?.touched)">Required</em>
+          <input  id="Address" type="text" required class="form-control" name="customerAddress"  (ngModel)=customer.customerAddress placeholder="Enter  customerAddress">
+      </div>
+  
+      <div class="form-group">
+      <label for="userName"> customer userName</label>
+      <em *ngIf="newCustomerForm.controls.userName?.invalid && (newCustomerForm.controls.userName?.touched)">Required</em>
+      <input  id="userName" type="text" required class="form-control" name="userName"  (ngModel)=customer.userName placeholder="Enter  userName">
+  </div>
+
+
+
+
+  
+  <div class="form-group">
+          <label for="password"> customer password</label>
+          <em *ngIf="newCustomerForm.controls.password?.invalid && (newCustomerForm.controls.password?.touched)">Required</em>
+          <input  id="password" type="text" required class="form-control" name="password"  (ngModel)=customer.password placeholder="Enter  password">
+      </div>
+  
+  </div>
+      <button type="submit"  [disabled]=newCustomerForm.invalid class="btn btn-primary">Save</button>
+      <button type="button"   class="btn btn-primary" (click)="cancel()">Cancel</button>
+  <form>
+
+
+
+

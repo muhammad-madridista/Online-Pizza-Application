@@ -1,0 +1,52 @@
+`<div class="col-md-6">
+  <br />
+  <br />
+
+
+  <form #newPizzaForm="ngForm" autocomplete="off" novalidate (ngSubmit)="addPizza(newPizzaForm.value)">
+
+
+    <div class="form-group">
+      <label for="id">Pizza Id</label>
+      <em *ngIf="newPizzaForm.controls.pizzaId?.invalid && (newPizzaForm.controls.pizzaId?.touched)">Required</em>
+      <input id="id" type="number" required class="form-control" name="pizzaId" (ngModel)=pizza.pizzaId
+        placeholder="Enter Pizza Id">
+    </div>
+
+
+    <div class="form-group">
+      <label for="name">Pizza Name</label>
+      <em *ngIf="newPizzaForm.controls.pizzaName?.invalid && (newPizzaForm.controls.pizzaName?.touched)">Required</em>
+      <input id="name" type="text" required class="form-control" name="pizzaName" (ngModel)=pizza.pizzaName
+        placeholder="Enter Pizza Name">
+    </div>
+
+    <div class="form-group">
+      <label for="Cost">Pizza Cost</label>
+      <em *ngIf="newPizzaForm.controls.pizzaCost?.invalid && (newPizzaForm.controls.pizzaCost?.touched)">Required</em>
+
+      <input id="Cost" type="number" required class="form-control" name="pizzaCost" (ngModel)=pizza.pizzaCost
+        placeholder="Enter Pizza Cost">
+    </div>
+
+
+
+    <div class="form-group">
+      <label for="type">Pizza Type</label>
+
+
+      <select id="inputSize" formControlName="size" class="form-control">
+        <option *ngFor="let psize of pizzasize">{{psize}}</option>
+      </select>
+
+      <label for="description">Pizza Description</label>
+
+
+    </div>
+
+
+    <button type="submit" [disabled]=newPizzaForm.invalid class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-primary" (click)="cancel()">Cancel</button>
+    <form>
+</div>
+`

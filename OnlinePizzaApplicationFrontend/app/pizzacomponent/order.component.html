@@ -1,0 +1,37 @@
+<div>
+        <div>
+
+                <div class="card"  style="width: 21rem;">
+                        <img class="card-img-top"
+                                src='/assets/images/pizzalist.jpg' >
+
+                        <div class="card-body">
+
+                                <!-- <div   [routerLink]="['/pizzaById']" > -->
+
+                                <body>
+
+                                        <ul class="list-group list-group-flush">
+                                                <b>
+                                                        <li class="list-group-item"> Pizza Name : {{pizzadata?.pizzaName
+                                                                | uppercase}}</li>
+                                                        </b>
+
+                                                <li class="list-group-item"> Pizza ID : {{pizzadata?.pizzaId}}</li>
+                                                <li class="list-group-item"> Pizza cost : {{pizzadata?.pizzaCost |
+                                                        currency : 'INR' }} </li>
+                                                <li class="list-group-item"> Type : {{pizzadata?.pizzaType}} </li>
+                                                <li class="list-group-item"> Description :
+                                                        {{pizzadata?.pizzaDescription}}</li>
+
+                                        </ul>
+                                </body>
+
+                                <div> <button [class]=buttonStyle
+                                                (click)="onButtonClick(pizzadata.pizzaId,pizzadata.pizzaType,pizzadata.pizzaName,pizzadata?.pizzaDescription,pizzadata.pizzaCost)">
+                                                Order </button></div>
+
+                        </div>
+
+                </div>
+        </div></div>

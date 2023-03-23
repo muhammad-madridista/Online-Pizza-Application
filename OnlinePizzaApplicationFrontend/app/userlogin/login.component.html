@@ -1,0 +1,94 @@
+<body>
+    
+    <div class="jumbotron text center">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+            <div class="card-body">
+            <h5 class="card-title text-center"><strong>User Login</strong> </h5>
+            <form class="form-signin" #signInForm ="ngForm" (ngSubmit)="signInUser(signInForm.value)">
+
+                <!-- {{signInForm.value | json}} -->
+                <div class="form-label-group">
+                <label style="text-align: center;" for="inputEmail"><h6>User Name :</h6> </label> 
+                
+                <input type="text"  class="form-control" placeholder="Username"name="userName" [(ngModel)]=userName required >
+                <em *ngIf="signInForm.controls.userName?.invalid && (signInForm.controls.userName?.touched)" style="font-size: medium; color:  darkred"> UserName can't be empty</em>
+                <!-- <span class="help-bpx" *ngIf="signInForm.get(userName.touched && !userName.valid)">Enter correct username</span> -->
+                <!-- <small class="form-text text muted" >Enter Correct Username</small> -->
+                </div><br>
+
+                <div class="form-label-group">
+                    <label style="text-align: center;" for="inputPassword">Password : </label> 
+                    <em id="errName" style="color:  rgb(228, 123, 26); font-size:medium;"></em>
+                    <input type="password"  class="form-control" placeholder="enter password"name="password" [(ngModel)]=password required >
+                    <em *ngIf="signInForm.controls.password?.invalid && (signInForm.controls.password?.touched)" style="font-size: medium; color:  darkred"> Password can't be empty .Minimum Lenght is 6</em>
+
+                </div>
+               
+               
+                &nbsp; &nbsp;<br>
+
+
+                <button  class="btn btn-lg btn-primary" type="submit" [disabled]="!signInForm.valid" >Login as a User</button>&nbsp;
+                <button class="btn btn-lg  btn-primary"  [routerLink]="['/registration']">Register as User</button>
+                <hr class="my-4">
+            
+            </form>
+            
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+    <router-outlet></router-outlet>
+</body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+
+
+
+   <!-- <body >
+    
+    <div class="jumbotron text center"> 
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+                <div class="card text-dark bg-info card-signin  " >
+                <div class="card-body">
+                <h5 class="card-title text-center"><strong>Sign In</strong></h5>
+                
+                <form class="form-signin" #signInForm ="ngForm" (ngSubmit)="signInUser(signInForm.value)">
+
+                    <div class="form-label-group">
+                    <label style="text-align: center;" for="inputEmail"><h6>Enter E-mail:</h6> </label> 
+                    <input type="email"  class="form-control" placeholder="Email address"name="email" [(ngModel)]=email required >
+                    <em id="errName" style="color:  darkred; font-size: large;"></em>
+                        <em *ngIf="signInForm.controls.email?.invalid && (signInForm.controls.email?.touched)" style="font-size: medium; color:  darkred"> Incorrect e-mail address</em>
+                    </div>
+
+                    <div class="form-label-group">
+                        <label style="text-align: center;" for="inputPassword"><h6>Enter Password:</h6> </label> 
+                        <input type="password"  class="form-control" placeholder="Password"name="password" [(ngModel)]=password required >
+                        </div>
+
+                    <button class="theme-btn btn-style-one btn-block" type="submit" [disabled]="!signInForm.valid" ><span class="txt">Sign In</span></button>
+                    <hr class="my-4">
+                
+                </form>
+                <button class="theme-btn btn-style-three btn-block"  [routerLink]="['/signup']"><span class="txt">Sign Up</span></button>
+                </div>
+            </div>
+
+            </div>
+        </div>
+     </div>
+</body>  -->
+
+
+

@@ -1,0 +1,30 @@
+.hoverwell:hover {
+    background-color: #addbfa;;
+    cursor: pointer;
+  }
+  
+  .well{
+    background-color: #e1e9e9;
+  }
+  .container {
+    padding-top: 100px;
+  }
+  
+  .pointable {
+    cursor: pointer;
+  }
+  h1 { font-weight: 700;}
+  .allcustomer{
+      margin-left: 50px;
+  }
+  body{
+      margin:auto;
+      padding: auto;
+  }
+  .content{
+      margin: 20px;
+  }
+  hr{
+      color: black;
+      border-top: 1px dashed red;
+  }

@@ -1,0 +1,14 @@
+/* input.ng-pristine {
+    background-color:rgb(241, 241, 241);
+}
+
+input.ng-touched.ng-invalid {
+    background-color:rgba(236, 76, 98, 0.534);
+}
+
+input.ng-touched.ng-valid {
+    background-color:rgb(225, 248, 225);
+} */
+input.ng-invalid.ng-touched{
+    border-color: red;
+}
